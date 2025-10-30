@@ -1,4 +1,4 @@
-import Material from './Material.js';
+import Material from './Recurso.js';
 
 export default class Pelicula extends Material {
     constructor(titol, director, genere, numExemplars) {

@@ -19,7 +19,7 @@ export async function getRecursoById(req, res) {
         if (recurso) {
             res.json(recurso);
         } else {
-            res.status(404).json({ error: "Recurso no encontrado" });
+            res.status(404).json({ error: "Recurso no encontrado , getRecursoById error" });
         }
     } catch (error) {
         res.status(500).json({ error: "Error al obtener el recurso" });
@@ -33,7 +33,7 @@ export async function createRecurso(req, res) {
         const resultado = await recursoService.createRecurso(nuevoRecurso);
         res.status(201).json({ id: resultado.insertId, ...nuevoRecurso });
     } catch (error) {
-        res.status(500).json({ error: "Error al crear el recurso" });
+        res.status(500).json({ error: "Error al crear el recurso createRecurso error" });
     }
 }
 

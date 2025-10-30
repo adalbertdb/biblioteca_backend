@@ -1,4 +1,4 @@
-import PeliculaService from "../services/peliculaService";
+import * as PeliculaService from "../services/peliculaService.js";
 
 export async function getPeliculas(req, res) {
     try {
@@ -9,7 +9,7 @@ export async function getPeliculas(req, res) {
     }
 }
 
-/* export async function getPeliculaById(req, res) {
+export async function getPeliculaById(req, res) {
     const id = req.params.id;
     try {
         const pelicula = await Pelicula.getPeliculaById(id);
@@ -54,4 +54,4 @@ export async function deletePelicula(req, res) {
     } catch (error) {
         res.status(500).json({error: "Error deleting pelicula"});
     }
-} */
+}
