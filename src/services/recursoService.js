@@ -13,10 +13,8 @@ export async function getRecursoById(id) {
     return rows[0];
 }
 
-export async function createRecurso(recurso) {
-    const resultado = await pool.query(
-        "INSERT INTO recursos (titulo, tipo, autor) VALUES (?, ?, ?)",
-        [recurso.titulo, recurso.tipo, recurso.autor]
-    );
-    return resultado[0];
+export async function updateRecurso(recurso){
+    const actualizacion = await pool.query(
+        "UPDATE "
+    )
 }

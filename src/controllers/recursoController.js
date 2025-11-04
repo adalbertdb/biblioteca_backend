@@ -26,17 +26,6 @@ export async function getRecursoById(req, res) {
     }
 }
 
-export async function createRecurso(req, res) {
-    const { titulo, tipo, autor } = req.body;
-    try {
-        const nuevoRecurso = new Recurso(titulo, tipo, autor);
-        const resultado = await recursoService.createRecurso(nuevoRecurso);
-        res.status(201).json({ id: resultado.insertId, ...nuevoRecurso });
-    } catch (error) {
-        res.status(500).json({ error: "Error al crear el recurso createRecurso error" });
-    }
-}
-
 export async function updateRecurso(req, res) {
     const id = req.params.id;
     const { titulo, tipo, autor, anio } = req.body;

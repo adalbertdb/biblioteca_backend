@@ -1,6 +1,6 @@
-import Material from './Recurso.js';
+import Recurso from './Recurso.js';
 
-export default class Pelicula extends Material {
+export default class Pelicula extends Recurso {
     constructor(titol, director, genere, numExemplars) {
         super(titol, numExemplars);
         this.director = director;
