@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Agregar nuevo recurso</h1>
-    <form action="/recursos" method="POST">
+    <form id="recursoForm" action="/recursos" method="POST">
         <label for="titulo">Título:</label><br>
         <input type="text" id="titulo" name="titulo" required><br><br>
         
@@ -16,12 +16,28 @@
         <label for="tipo">Tipo:</label><br>
         <select id="tipo" name="tipo" required>
             <option value="1">Libro</option>
-            <option value="2">pelicula</option>
+            <option value="2">Pelicula</option>
             <option value="3">Revista</option>
             
         </select><br><br>
         
         <button type="submit">Agregar Recurso</button>
     </form>
+
+    <script>
+        const form = document.getElementById('recursoForm');
+        const tipoSelect = document.getElementById('tipo');
+
+        tipoSelect.addEventListener('change', () => {
+            const selectedValue = tipoSelect.value;
+            if (selectedValue === '1') {
+                form.action = '/recursos/libros';
+            } else if (selectedValue === '2') {
+                form.action = '/recursos/peliculas';
+            } else if (selectedValue === '3') {
+                form.action = '/recursos/revistas';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -12,11 +12,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware para que Express entienda JSON
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'form.html'));
+});
 
 // Montamos el router de recursos en la ruta base /recursos
 app.use("/recursos", recursoRouter);
