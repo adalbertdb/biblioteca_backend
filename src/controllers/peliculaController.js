@@ -25,7 +25,10 @@ export async function getPeliculaById(req, res) {
 
 export async function createPelicula(req, res) {
     try {
-        console.log(req)
+        console.log("Request body:", req.body);
+        if (!req.body) {
+            return res.status(400).json({ error: "Request body is missing" });
+        }
         const pelicula = await PeliculaService.createPelicula(req.body);
         res.status(201).json(pelicula)
     } catch (error) {
@@ -34,10 +37,22 @@ export async function createPelicula(req, res) {
     }
 }
 
-/* export async function updatePelicula(req, res) {
-    //TO-DO
+export async function updatePelicula(req, res) {
+    const id = req.params.id;
+    try {
+        const pelicula = await PeliculaService.updatePelicula(id, req.body);
+        res.json(pelicula);
+    } catch (error) {
+        res.status(500).json({error: "Error updating pelicula"});
+    }
 }
 
 export async function deletePelicula(req, res) {
-    //TO-DO
-} */
+    const id = req.params.id;
+    try {
+        await PeliculaService.deletePelicula(id);
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({error: "Error deleting pelicula"});
+    }
+}

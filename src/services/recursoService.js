@@ -14,7 +14,5 @@ export async function getRecursoById(id) {
 }
 
 export async function updateRecurso(recurso){
-    const actualizacion = await pool.query(
-        "UPDATE "
-    )
+    //TO-DO
 }

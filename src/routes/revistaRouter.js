@@ -1,9 +1,12 @@
-import { Router } from "express";
+import {Router} from "express";
+import * as revistasController from "../controllers/revistaController.js"
 
-const router = Router()
+const router = Router();
 
-router.get('/',(req,res) => {
-    res.send("you are in Revistas")
-})
+router.get("/",revistasController.getRevistas);
+router.post("/",revistasController.createRevista);
+router.get("/:id",revistasController.getRevistaById);
+router.put("/:id",revistasController.updateRevista);
+router.delete("/:id",revistasController.deleteRevista);
 
-export default router
+export default router;

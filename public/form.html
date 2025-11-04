@@ -9,17 +9,34 @@
     <form id="recursoForm" action="/recursos" method="POST">
         <label for="titulo">Título:</label><br>
         <input type="text" id="titulo" name="titulo" required><br><br>
-        
-        <label for="autor">Autor:</label><br>
-        <input type="text" id="autor" name="autor" required><br><br>
+
+        <label for="num_ejemplares">Número de Ejemplares:</label><br>
+        <input type="number" id="num_ejemplares" name="num_ejemplares" required><br><br>
         
         <label for="tipo">Tipo:</label><br>
         <select id="tipo" name="tipo" required>
+            <option value="">Seleccione un tipo</option>
             <option value="1">Libro</option>
             <option value="2">Pelicula</option>
             <option value="3">Revista</option>
-            
         </select><br><br>
+
+        <div id="libro-fields" style="display: none;">
+            <label for="autor">Autor:</label><br>
+            <input type="text" id="autor" name="autor"><br><br>
+        </div>
+
+        <div id="pelicula-fields" style="display: none;">
+            <label for="director">Director:</label><br>
+            <input type="text" id="director" name="director"><br><br>
+            <label for="genero">Género:</label><br>
+            <input type="text" id="genero" name="genero"><br><br>
+        </div>
+
+        <div id="revista-fields" style="display: none;">
+            <label for="fecha_publicacion">Fecha de Publicación:</label><br>
+            <input type="date" id="fecha_publicacion" name="fecha_publicacion"><br><br>
+        </div>
         
         <button type="submit">Agregar Recurso</button>
     </form>
@@ -27,17 +44,43 @@
     <script>
         const form = document.getElementById('recursoForm');
         const tipoSelect = document.getElementById('tipo');
+        const libroFields = document.getElementById('libro-fields');
+        const peliculaFields = document.getElementById('pelicula-fields');
+        const revistaFields = document.getElementById('revista-fields');
 
         tipoSelect.addEventListener('change', () => {
             const selectedValue = tipoSelect.value;
+            
+            // Hide all specific fields
+            libroFields.style.display = 'none';
+            peliculaFields.style.display = 'none';
+            revistaFields.style.display = 'none';
+
+            // Reset required attributes
+            document.getElementById('autor').required = false;
+            document.getElementById('director').required = false;
+            document.getElementById('genero').required = false;
+            document.getElementById('fecha_publicacion').required = false;
+
+
             if (selectedValue === '1') {
                 form.action = '/recursos/libros';
+                libroFields.style.display = 'block';
+                document.getElementById('autor').required = true;
             } else if (selectedValue === '2') {
                 form.action = '/recursos/peliculas';
+                peliculaFields.style.display = 'block';
+                document.getElementById('director').required = true;
+                document.getElementById('genero').required = true;
             } else if (selectedValue === '3') {
                 form.action = '/recursos/revistas';
+                revistaFields.style.display = 'block';
+                document.getElementById('fecha_publicacion').required = true;
             }
         });
+
+        // Set initial state on page load
+        tipoSelect.dispatchEvent(new Event('change'));
     </script>
 </body>
 </html>

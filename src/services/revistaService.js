@@ -1,40 +1,37 @@
 import {pool} from "../config/database.js";
 
-export async function getPeliculas() {
-    const [rows] =  await pool.query("SELECT * FROM vw_peliculas");
+export async function getRevistas() {
+    const [rows] =  await pool.query("SELECT * FROM vw_revistas");
     return rows;
 }
 
-export async function getPeliculaById(id) {
-    const [rows] =  await pool.query("SELECT * FROM vw_peliculas WHERE id = ?", [id]);
+export async function getRevistaById(id) {
+    const [rows] =  await pool.query("SELECT * FROM vw_revistas WHERE id = ?", [id]);
     if (rows.length === 0) {
         return null;
     }
     return rows[0];
 }
 
-export async function createPelicula(pelicula) {
-    if (!pelicula) {
-        throw new Error("Pelicula data is missing");
-    }
-    const { titulo, num_ejemplares, director, genero } = pelicula;
+export async function createRevista(revista) {
+    const { titulo, num_ejemplares, fecha_publicacion } = revista;
     const connection = await pool.getConnection();
     try {
         await connection.beginTransaction();
 
         const [resultRecurso] = await connection.execute(
             "INSERT INTO recursos (tipo, titulo, num_ejemplares) VALUES (?, ?, ?)",
-            [2, titulo, num_ejemplares]
+            [3, titulo, num_ejemplares]
         );
         const idRecurso = resultRecurso.insertId;
 
         await connection.execute(
-            "INSERT INTO peliculas (id, director, genero) VALUES (?, ?, ?)",
-            [idRecurso, director, genero]
+            "INSERT INTO revistas (id, fecha_publicacion) VALUES (?, ?)",
+            [idRecurso, fecha_publicacion]
         );
 
         await connection.commit();
-        return { id: idRecurso, ...pelicula };
+        return { id: idRecurso, ...revista };
     } catch (error) {
         await connection.rollback();
         throw error;
@@ -43,8 +40,8 @@ export async function createPelicula(pelicula) {
     }
 }
 
-export async function updatePelicula(id, pelicula) {
-    const { titulo, num_ejemplares, director, genero } = pelicula;
+export async function updateRevista(id, revista) {
+    const { titulo, num_ejemplares, fecha_publicacion } = revista;
     const connection = await pool.getConnection();
     try {
         await connection.beginTransaction();
@@ -55,12 +52,12 @@ export async function updatePelicula(id, pelicula) {
         );
 
         await connection.execute(
-            "UPDATE peliculas SET director = ?, genero = ? WHERE id = ?",
-            [director, genero, id]
+            "UPDATE revistas SET fecha_publicacion = ? WHERE id = ?",
+            [fecha_publicacion, id]
         );
 
         await connection.commit();
-        return { id, ...pelicula };
+        return { id, ...revista };
     } catch (error) {
         await connection.rollback();
         throw error;
@@ -69,12 +66,12 @@ export async function updatePelicula(id, pelicula) {
     }
 }
 
-export async function deletePelicula(id) {
+export async function deleteRevista(id) {
     const connection = await pool.getConnection();
     try {
         await connection.beginTransaction();
 
-        await connection.execute("DELETE FROM peliculas WHERE id = ?", [id]);
+        await connection.execute("DELETE FROM revistas WHERE id = ?", [id]);
         await connection.execute("DELETE FROM recursos WHERE id = ?", [id]);
 
         await connection.commit();

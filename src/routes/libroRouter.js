@@ -1,16 +1,12 @@
-import { Router } from "express";
-//import Llibre from "../models/Llibre";
+import {Router} from "express";
+import * as librosController from "../controllers/libroController.js"
 
 const router = Router();
 
-router.get('/', (req,res) =>{
-    res.send("You are in Libros");
-});
-
-/* router.get("/","getLlibres");
-router.post("/","createLlibre");
-router.get("/:id","getLlibreById");
-router.put("/:id","updateLlibre");
-router.delete("/:id","deleteLlibre"); */
+router.get("/",librosController.getLibros);
+router.post("/",librosController.createLibro);
+router.get("/:id",librosController.getLibroById);
+router.put("/:id",librosController.updateLibro);
+router.delete("/:id",librosController.deleteLibro);
 
 export default router;
