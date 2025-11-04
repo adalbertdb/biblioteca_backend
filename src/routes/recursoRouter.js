@@ -12,7 +12,7 @@ router.use("/revistas", revistaRouter);
 router.get("/", recursoController.getRecursos);
 router.get("/:id", recursoController.getRecursoById);
 router.put("/:id", recursoController.updateRecurso);
-//router.delete("/:id", recursoController.deleteRecurso);
+router.delete("/:id", recursoController.deleteRecurso);
 
 
 //router.get("/peliculas/:id", peliculaController.getPeliculas)

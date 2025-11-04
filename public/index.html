@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <style>
+        body { font-family: sans-serif; }
+        nav { margin-bottom: 1em; }
+        nav button { margin-right: 1em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Biblioteca</h1>
+    <nav>
+        <button onclick="showView('recursos')">Recursos</button>
+        <button onclick="showView('socios')">Socios</button>
+        <button onclick="showView('admins')">Admins</button>
+    </nav>
+
+    <div id="content">
+        <!-- Data will be rendered here -->
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Admin</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Admin</h1>
+    <form action="/admins" method="POST">
+        <label for="dni">DNI:</label><br>
+        <input type="text" id="dni" name="dni" required><br><br>
+        
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="id_cargo">Cargo:</label><br>
+        <select id="id_cargo" name="id_cargo" required>
+            <option value="1">Administrador</option>
+            <option value="2">Ayudante</option>
+        </select><br><br>
+        
+        <button type="submit">Agregar Admin</button>
+    </form>
+</body>
+</html>
