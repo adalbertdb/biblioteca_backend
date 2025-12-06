@@ -25,13 +25,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// Montamos el router de recursos en la ruta base /recursos
 app.use("/recursos", recursoRouter);
 app.use("/socios", socioRouter);
 app.use("/admins", adminRouter);
-//app.use("/recursos/peliculas", peliculasRouter);
-
-//app.use("/llibres", llibreRouter);
 
 // Exportamos la app para usarla en server.js
 export default app;
